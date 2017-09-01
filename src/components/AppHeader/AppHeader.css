@@ -1,0 +1,29 @@
+.app-header {
+  max-width: 1000px;
+  width: 70%;
+  margin: auto;
+  height: 64px;
+}
+
+@media (max-width: 800px)  {
+  .app-header {
+    width: 85%;
+  }
+}
+
+@media (max-width: 400px)  {
+  .app-header {
+    width: 100%;
+    padding: 0 12px;
+  }
+}
+
+.app-header .logo {
+  cursor: pointer;
+  background-color: transparent;
+  margin-top: 11px;
+}
+
+.app-header .right-buttons {
+  float: right;
+}
