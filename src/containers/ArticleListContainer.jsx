@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import MainPage from 'components/MainPage/MainPage';
+import ArticleList from 'components/ArticleList/ArticleList';
 
-export default class MainPageContainer extends Component {
+export default class ArticleListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ export default class MainPageContainer extends Component {
 
   render() {
     return(
-      <MainPage
+      <ArticleList
         handleSelect={this.handleSelect}
         category={this.state.category}
       />

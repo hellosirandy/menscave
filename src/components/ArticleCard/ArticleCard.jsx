@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Col, Icon, Row } from 'antd';
 import './ArticleCard.css';
 
@@ -33,16 +33,16 @@ const Image = () => {
   )
 }
 
-export default class ArticleCard extends Component {
-  render() {
-    return(
-      <Card className="article-card" title="Card title" extra="01/01/2018" style={{ width: '100%' }}>
-        <Split/>
-        <hr/>
-        <div className="bottom-buttons">
-          <Icon type="message" />
-        </div>
-      </Card>
-    )
-  }
+const ArticleCard = () => {
+  return(
+    <Card className="article-card" title="Card title" extra="01/01/2018" style={{ width: '100%' }}>
+      <Split/>
+      <hr/>
+      <div className="bottom-buttons">
+        <Icon type="message" />
+      </div>
+    </Card>
+  )
 }
+
+export default ArticleCard;
