@@ -1,0 +1,14 @@
+.paragraph-input .paragraph-header {
+  border-bottom: 1px dashed #d5d5d5;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.paragraph-input .paragraph-header .paragraph-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.paragraph-input .paragraph-header .paragraph-buttons {
+  float: right;
+}
