@@ -3,6 +3,7 @@
   margin: auto;
   min-height: 100vh;
   background-color: white;
+  padding-bottom: 100px;
 }
 
 @media (max-width: 800px)  {

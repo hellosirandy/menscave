@@ -5,14 +5,14 @@ import ImageInputContainer from '../../containers/ImageInputContainer';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-const SplitInput = ({ form }) => {
+const SplitInput = ({ form, keyNum }) => {
   const { getFieldDecorator } = form;
   return (
     <Row gutter={12}>
       <Col xs={{ span: 24 }} sm={{ span: 12 }}>
         <FormItem label="English">
-          {getFieldDecorator(`paragraphs-0.content.english`, {
-            initialValue: 'English'
+          {getFieldDecorator(`paragraphs-${keyNum}.content.english`, {
+            initialValue: ''
           })(
             <TextArea
               style={{ resize: 'none' }}
@@ -23,8 +23,8 @@ const SplitInput = ({ form }) => {
       </Col>
       <Col xs={{ span: 24 }} sm={{ span: 12 }}>
         <FormItem label="中文">
-          {getFieldDecorator(`paragraphs-0.content.chinese`, {
-            initialValue: '中文'
+          {getFieldDecorator(`paragraphs-${keyNum}.content.chinese`, {
+            initialValue: ''
           })(
             <TextArea
               style={{ resize: 'none' }}
@@ -37,11 +37,13 @@ const SplitInput = ({ form }) => {
   )
 }
 
-const SingleInput = ({ form }) => {
+const SingleInput = ({ form, keyNum }) => {
   const { getFieldDecorator } = form;
   return (
     <FormItem>
-      {getFieldDecorator(`paragraphs-0.content`)(
+      {getFieldDecorator(`paragraphs-${keyNum}.content`, {
+        initialValue: ''
+      })(
         <TextArea
           style={{ resize: 'none' }}
           autosize={{ minRows: 5, maxRows: 20 }}
@@ -51,46 +53,49 @@ const SingleInput = ({ form }) => {
   )
 }
 
-const ImageInput = ({ form }) => {
+const ImageInput = ({ form, keyNum }) => {
   return (
     <ImageInputContainer form={form}/>
   )
 }
 
-const ParagraphInput = ({ hasTitle, form, handleHasTitleClick, handleAddButtonClick }) => {
+const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, index, paragraph, keyNum }) => {
   const dropdownMenu = (
     <Menu style={{ minWidth: 100 }}>
       <Menu.Item>
-        <a onClick={() => handleAddButtonClick('single')}>
+        <a onClick={() => handleAddButtonClick(index, 'single')}>
           <Icon type="file-text" style={{ marginRight: 5 }} />Single
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a  onClick={() => handleAddButtonClick('split')}>
+        <a  onClick={() => handleAddButtonClick(index, 'split')}>
           <Icon type="copy" style={{ marginRight: 5 }} />Split
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a  onClick={() => handleAddButtonClick('image')}>
+        <a  onClick={() => handleAddButtonClick(index, 'image')}>
           <Icon type="picture" style={{ marginRight: 5 }} />Image
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a  onClick={() => handleAddButtonClick('video')}>
+      {/* <Menu.Item>
+        <a  onClick={() => handleAddButtonClick(index, 'video')}>
           <Icon type="video-camera" style={{ marginRight: 5 }} />Video
         </a>
-      </Menu.Item>
+      </Menu.Item> */}
     </Menu>
   );
   const { getFieldDecorator } = form;
+  const content = paragraph.type === 'single' ? (<SingleInput form={form} keyNum={keyNum}/>) : (
+    paragraph.type === 'split' ? (<SplitInput form={form} keyNum={keyNum}/>) : (<ImageInput form={form} keyNum={keyNum}/>)
+  )
   return(
     <div className="paragraph-input">
       <div className="paragraph-header">
-        <h3>Paragraph 1
+        <h3>Paragraph {index+1}
           <span className="paragraph-buttons">
             <Button type="primary" shape="circle" icon="flag" size="small" ghost
               style={{ marginRight: 5}}
-              onClick={handleHasTitleClick}
+              onClick={() => handleHasTitleClick(keyNum)}
             />
             <Button type="danger" shape="circle" icon="minus" size="small"
               style={{ marginRight: 5}}
@@ -102,16 +107,14 @@ const ParagraphInput = ({ hasTitle, form, handleHasTitleClick, handleAddButtonCl
           </span>
         </h3>
       </div>
-      {hasTitle &&
+      {paragraph.title !== null &&
         <FormItem label="Paragraph Title">
           {getFieldDecorator('paragraphs-0.title')(
             <Input size="large"/>
           )}
         </FormItem>
       }
-      {/* <SplitInput form={form}/> */}
-      {/* <SingleInput form={form}/> */}
-      <ImageInput form={form}/>
+      {content}
     </div>
   )
 }
