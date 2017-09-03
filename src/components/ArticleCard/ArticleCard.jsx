@@ -2,13 +2,13 @@ import React from 'react';
 import { Card, Col, Icon, Row } from 'antd';
 import './ArticleCard.css';
 
-const Single = () => {
-  return(
-    <div className="single">
-      Whatever content
-    </div>
-  )
-}
+// const Single = () => {
+//   return(
+//     <div className="single">
+//       Whatever content
+//     </div>
+//   )
+// }
 
 const Split = () => {
   return(
@@ -25,13 +25,13 @@ const Split = () => {
   )
 }
 
-const Image = () => {
-  return (
-    <div className="image">
-      <img src="https://scontent.fkhh1-1.fna.fbcdn.net/v/t1.0-9/21271045_1674821659197276_9061070553551669497_n.jpg?oh=af75ff7b8c7b287c580bdeb0b5e23571&oe=5A59B696" alt=""/>
-    </div>
-  )
-}
+// const Image = () => {
+//   return (
+//     <div className="image">
+//       <img src="https://scontent.fkhh1-1.fna.fbcdn.net/v/t1.0-9/21271045_1674821659197276_9061070553551669497_n.jpg?oh=af75ff7b8c7b287c580bdeb0b5e23571&oe=5A59B696" alt=""/>
+//     </div>
+//   )
+// }
 
 const ArticleCard = () => {
   return(

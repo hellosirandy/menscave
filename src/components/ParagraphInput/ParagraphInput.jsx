@@ -55,7 +55,7 @@ const SingleInput = ({ form, keyNum }) => {
 
 const ImageInput = ({ form, keyNum }) => {
   return (
-    <ImageInputContainer form={form}/>
+    <ImageInputContainer form={form} keyNum={keyNum}/>
   )
 }
 

@@ -1,16 +1,16 @@
 import React from 'react';
-import { Col, Row, Icon, Upload } from 'antd';
+import { Icon, Progress, Spin, Upload } from 'antd';
 import './ImageInput.css';
 const Dragger = Upload.Dragger;
 
-const ImageUploader = ({ handleFileSelected }) => {
+const ImageUploader = ({ handleFileSelected, form, keyNum }) => {
   const uploadProps = {
     action: '/',
     beforeUpload: (file) => {
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = function (e) {
-        handleFileSelected(reader.result, file);
+        handleFileSelected(reader.result, file, form, keyNum);
       };
       return false;
     },
@@ -27,20 +27,29 @@ const ImageUploader = ({ handleFileSelected }) => {
   )
 }
 
-const ImageWall = ({ imageUrl }) => {
+const ImageWall = ({ imageURL, percentage, spinning }) => {
   return (
     <div className="image-wall">
-      <img src={imageUrl} alt=""/>
+      <div className="section progress-section">
+        <Progress percent={percentage} type="circle" width={40}/>
+      </div>
+      <div className="section image-section">
+        <Spin spinning={spinning}>
+          <img src={imageURL} alt=""/>
+        </Spin>
+      </div>
     </div>
   )
 }
 
-const ImageInput = ({ handleFileSelected, imageUrl }) => {
-  const content = imageUrl === '' ? (
-    <ImageUploader handleFileSelected={handleFileSelected}/>
+const ImageInput = ({ handleFileSelected, imageURL, percentage, keyNum, form, upoadFinish }) => {
+  const { getFieldDecorator } = form;
+  const content = imageURL === '' ? (
+    <ImageUploader handleFileSelected={handleFileSelected} form={form} keyNum={keyNum}/>
   ) : (
-    <ImageWall imageUrl={imageUrl}/>
+    <ImageWall imageURL={imageURL} percentage={percentage} spinning={!upoadFinish}/>
   );
+  getFieldDecorator(`paragraphs-${keyNum}.content`, { initialValue: '' });
   return (
     <div className="image-input">
       { content }

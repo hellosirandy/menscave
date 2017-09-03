@@ -8,11 +8,36 @@
 
 .image-input .image-wall {
   width: 100%;
+}
+
+.image-input .image-wall .section {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.image-input .image-wall img {
+.image-input .image-wall .progress-section {
+  margin-bottom: 12px;
+}
+
+.image-input .image-wall .image-section {
+  /*background-color: #f6f6f6;*/
+}
+
+.image-input .image-wall .image-section img {
   max-width: 100%;
   max-height: 400px;
+  border: 1px solid #e7e7e7;
+}
+
+@media (max-width: 800px) {
+  .image-input .image-wall .image-section img {
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 400px) {
+  .image-input .image-wall .image-section img {
+    max-height: 300px;
+  }
 }

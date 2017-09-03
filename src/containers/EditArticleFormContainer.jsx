@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import EditArticleForm from 'components/EditArticleForm/EditArticleForm';
+import { Route } from 'react-router-dom';
 import { Form } from 'antd';
 import API from '../api';
 import Article from '../models/article';
-const FormItem = Form.Item;
 
 const api = new API();
 export default class EditArticleFormContainer extends Component {
-  handleSubmit = (e, form) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    }
+  }
+  handleSubmit = (e, form, history) => {
+    this.setState({ loading: true });
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
@@ -18,7 +25,8 @@ export default class EditArticleFormContainer extends Component {
         const currentTime = new Date().getTime();
         const article = new Article(values.subject, values.category, paragraphs, currentTime, currentTime);
         api.saveArticle(article).then(res => {
-          console.log('success');
+          this.setState({ loading: false });
+          history.push('/article');
         });
       }
     });
@@ -26,7 +34,8 @@ export default class EditArticleFormContainer extends Component {
   render() {
     const EAF = Form.create()(EditArticleForm);
     return(
-      <EAF handleSubmit={this.handleSubmit}/>
+      <Route render={({ history }) => (<EAF handleSubmit={this.handleSubmit} loading={this.state.loading} history={history}/>)}
+      />
     )
   }
 }

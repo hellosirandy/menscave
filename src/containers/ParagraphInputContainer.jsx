@@ -7,7 +7,7 @@ export default class ParagraphInputContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paragraphs: [new Paragraph(null, 'split', null)],
+      paragraphs: [new Paragraph(null, 'image', null)],
     }
   }
 
