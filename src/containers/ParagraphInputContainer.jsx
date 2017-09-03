@@ -7,7 +7,7 @@ export default class ParagraphInputContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paragraphs: [new Paragraph(null, 'image', null)],
+      paragraphs: [new Paragraph(null, 'split', null)],
     }
   }
 
@@ -36,6 +36,16 @@ export default class ParagraphInputContainer extends Component {
     console.log(form.getFieldValue('keys'));
   }
 
+  handleDeleteButtonClick = (k, form) => {
+    const keys = form.getFieldValue('keys');
+    if (keys.length === 1) {
+      return;
+    }
+    form.setFieldsValue({
+      keys: keys.filter(key => key !== k),
+    });
+  }
+
   render() {
     const { getFieldDecorator, getFieldValue } = this.props.form;
     getFieldDecorator('paragraphs', {initialValue: this.state.paragraphs});
@@ -49,6 +59,7 @@ export default class ParagraphInputContainer extends Component {
           form={this.props.form}
           handleHasTitleClick={this.handleHasTitleClick}
           handleAddButtonClick={this.handleAddButtonClick}
+          handleDeleteButtonClick={this.handleDeleteButtonClick}
           index={index}
           paragraph={paragraphs[k]}
           keyNum={k}

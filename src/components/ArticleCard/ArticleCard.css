@@ -2,16 +2,8 @@
   cursor: pointer;
 }
 
-.article-card .split .content {
-  margin-bottom: 12px;
-}
-
-.article-card .image img {
-  width: 100%;
-}
-
 .article-card hr {
-  margin-bottom: 12px;
+  margin: 12px 0;
 }
 
 .article-card .bottom-buttons {

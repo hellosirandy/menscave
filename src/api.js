@@ -41,4 +41,17 @@ export default class API {
       }
     )
   }
+
+  getArticles(category) {
+    const promise = new Promise((resolve, reject) => {
+      if (category === 'all') {
+        databaseRef.child('articles').once('value', snapshot => {
+          resolve(snapshot.val());
+        });
+      } else {
+
+      }
+    });
+    return promise;
+  }
 }

@@ -59,7 +59,7 @@ const ImageInput = ({ form, keyNum }) => {
   )
 }
 
-const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, index, paragraph, keyNum }) => {
+const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, handleDeleteButtonClick, index, paragraph, keyNum }) => {
   const dropdownMenu = (
     <Menu style={{ minWidth: 100 }}>
       <Menu.Item>
@@ -88,6 +88,7 @@ const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, index
   const content = paragraph.type === 'single' ? (<SingleInput form={form} keyNum={keyNum}/>) : (
     paragraph.type === 'split' ? (<SplitInput form={form} keyNum={keyNum}/>) : (<ImageInput form={form} keyNum={keyNum}/>)
   )
+  getFieldDecorator(`paragraphs-${keyNum}.type`, { initialValue: paragraph.type });
   return(
     <div className="paragraph-input">
       <div className="paragraph-header">
@@ -100,6 +101,7 @@ const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, index
             <Button type="danger" shape="circle" icon="minus" size="small"
               style={{ marginRight: 5}}
               ghost
+              onClick={() => handleDeleteButtonClick(keyNum, form)}
             />
             <Dropdown overlay={dropdownMenu} trigger={['click']}>
               <Button type="primary" shape="circle" icon="plus" size="small" ghost/>

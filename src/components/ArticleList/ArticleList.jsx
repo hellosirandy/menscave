@@ -3,7 +3,12 @@ import CategoryMenu from '../CategoryMenu/CategoryMenu';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import './ArticleList.css';
 
-const ArticleList = ({ handleSelect, category }) => {
+const ArticleList = ({ handleSelect, category, articles }) => {
+  const articleList = articles.map((a, index) => {
+    return (
+      <ArticleCard key={index} article={a}/>
+    )
+  });
   return (
     <div className="main-page">
       <CategoryMenu
@@ -11,7 +16,7 @@ const ArticleList = ({ handleSelect, category }) => {
         category={category}
       />
       <div className="article-list">
-        <ArticleCard/>
+        {articleList}
       </div>
     </div>
   )
