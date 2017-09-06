@@ -3,7 +3,6 @@ export default class Paragraph {
     title,
     type,
     content,
-    key,
   ) {
     this.title = title;
     this.type = type;
@@ -16,6 +15,5 @@ export default class Paragraph {
         this.content = { english: '', chinese: ''};
       }
     }
-    this.key = key;
   }
 }

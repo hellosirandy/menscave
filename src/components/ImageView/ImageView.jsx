@@ -1,11 +1,14 @@
 import React from 'react';
+import { Spin } from 'antd';
 import './ImageView.css';
 
-const ImageView = ({ content }) => {
+const ImageView = ({ content, loading, finish }) => {
   return (
-    <div className="image-view">
-      <img src={content} alt=""/>
-    </div>
+    <Spin spinning={loading}>
+      <div className="image-view">
+        <img src={content} alt="" onLoad={finish}/>
+      </div>
+    </Spin>
   )
 }
 

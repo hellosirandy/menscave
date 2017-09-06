@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Icon } from 'antd';
 import { Link } from 'react-router-dom'
-import ImageView from '../ImageView/ImageView';
+import ImageViewContainer from '../../containers/ImageViewContainer';
 import SingleView from '../SingleView/SingleView';
 import SplitView from '../SplitView/SplitView';
 import './ArticleCard.css';
@@ -9,7 +9,7 @@ import './ArticleCard.css';
 const ArticleCard = ({ article }) => {
   const cardContent = article ? article.paragraphs[0].type === 'single' ? (<SingleView content={article.paragraphs[0].content}/>) : (
     article.paragraphs[0].type === 'split' ? (<SplitView content={article.paragraphs[0].content}/>) : (
-      article.paragraphs[0].type === 'image' ? (<ImageView content={article.paragraphs[0].content}/>) : null
+      article.paragraphs[0].type === 'image' ? (<ImageViewContainer content={article.paragraphs[0].content}/>) : null
     )
   ) : null;
   const content = article ? (

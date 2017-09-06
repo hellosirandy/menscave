@@ -13,7 +13,6 @@ export default class SingleArticleContainer extends Component {
   }
   componentDidMount() {
     api.getSingleArticle(this.props.match.params.article).then(res => {
-      console.log(res);
       this.setState({ article: res, loading: false });
     });
   }

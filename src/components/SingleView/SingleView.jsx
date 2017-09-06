@@ -3,7 +3,7 @@ import './SingleView.css';
 
 const SingleView = ({ content }) => {
   return(
-    <div className="single">
+    <div className="single-view">
       {content}
     </div>
   )
