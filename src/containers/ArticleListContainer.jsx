@@ -10,17 +10,24 @@ export default class ArticleListContainer extends Component {
     this.state = {
       category: 'all',
       articles: [],
+      loading: true,
     }
   }
 
   componentDidMount() {
-    api.getArticles('all').then(res => {
+    this.fetchArticles(this.state.category);
+  }
+
+  fetchArticles = (category) => {
+    this.setState({ articles: [], loading: true });
+    api.getArticles(category).then(res => {
       this.onArticlesChange(res);
     });
   }
 
   handleSelect = (category) => {
     this.setState({ category: category.key });
+    this.fetchArticles(category.key);
   }
 
   onArticlesChange = (articles) => {
@@ -31,10 +38,11 @@ export default class ArticleListContainer extends Component {
         articles[key].category,
         articles[key].paragraphs,
         articles[key].updateTime,
-        articles[key].createTime
+        articles[key].createTime,
+        key,
       ));
     }
-    this.setState({ articles: nextArticles });
+    this.setState({ articles: nextArticles, loading: false });
   }
 
   render() {
@@ -42,7 +50,8 @@ export default class ArticleListContainer extends Component {
       <ArticleList
         handleSelect={this.handleSelect}
         category={this.state.category}
-        articles = {this.state.articles}
+        articles={this.state.articles}
+        loading={this.state.loading}
       />
     )
   }

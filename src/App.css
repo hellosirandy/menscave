@@ -1,3 +1,7 @@
 body {
   color: #525050;
 }
+
+a, a:hover {
+  color: inherit;
+}

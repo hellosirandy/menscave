@@ -49,8 +49,19 @@ export default class API {
           resolve(snapshot.val());
         });
       } else {
-
+        databaseRef.child('articles').orderByChild('category').equalTo(category).once('value', snapshot => {
+          resolve(snapshot.val());
+        });
       }
+    });
+    return promise;
+  }
+
+  getSingleArticle(key) {
+    const promise = new Promise((resolve, reject) => {
+      databaseRef.child(`articles/${key}`).once('value', snapshot => {
+        resolve(snapshot.val());
+      });
     });
     return promise;
   }

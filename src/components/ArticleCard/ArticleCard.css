@@ -1,9 +1,11 @@
 .article-card {
   cursor: pointer;
+  margin-bottom: 24px;
 }
 
 .article-card hr {
-  margin: 12px 0;
+  margin: 24px 0 12px 0;
+  color: #ebebeb;
 }
 
 .article-card .bottom-buttons {

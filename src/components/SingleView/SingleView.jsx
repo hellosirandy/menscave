@@ -1,10 +1,10 @@
 import React from 'react';
 import './SingleView.css';
 
-const SingleView = () => {
+const SingleView = ({ content }) => {
   return(
     <div className="single">
-      Whatever content
+      {content}
     </div>
   )
 }
