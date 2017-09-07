@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SingleArticle from '../components/SingleArticle/SingleArticle';
 import API from '../api';
-const api = new API();
+import Article from '../models/article';
+import { message } from 'antd';
 
 export default class SingleArticleContainer extends Component {
   constructor(props) {
@@ -10,10 +11,22 @@ export default class SingleArticleContainer extends Component {
       loading: true,
       article: {}
     }
+    this.api = new API();
   }
   componentDidMount() {
-    api.getSingleArticle(this.props.match.params.article).then(res => {
-      this.setState({ article: res, loading: false });
+    this.api.getSingleArticle(this.props.match.params.article).then(res => {
+      const article = new Article(
+        res.subject,
+        res.category,
+        res.paragraphs,
+        res.updateTime,
+        res.createTime,
+        this.props.match.params.article
+      );
+      this.setState({ article: article, loading: false });
+    }).catch(res => {
+      message.warning('This article doesn\'t exist.');
+      this.props.history.push('/article');
     });
   }
   render() {

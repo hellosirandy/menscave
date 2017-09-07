@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ImageInput from '../components/ImageInput/ImageInput';
 import API from '../api';
-const api = new API();
 
 export default class ImageInputContainer extends Component {
   constructor(props) {
@@ -11,10 +10,11 @@ export default class ImageInputContainer extends Component {
       percentage: 0,
       upoadFinish: false,
     }
+    this.api = new API();
   }
   handleFileSelected = (url, file, form, keyNum) => {
     this.setState({ imageURL: url });
-    api.uploadImage(file, (snapshot) => {
+    this.api.uploadImage(file, (snapshot) => {
       const percentage = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
       this.setState({ percentage });
     }, (snapshot) => {

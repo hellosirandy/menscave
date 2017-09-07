@@ -11,7 +11,7 @@ const config = {
 const firebaseApp = firebase.initializeApp(config);
 const database = firebaseApp.database();
 const databaseRef = database.ref();
-// const auth = firebase.auth();
+const auth = firebase.auth();
 const storage = firebase.storage();
 
 export default class API {
@@ -19,6 +19,7 @@ export default class API {
   saveArticle(article) {
     const promise = new Promise((resolve, reject) => {
       let articleRef = databaseRef.child('articles').push();
+      delete article.key;
       articleRef.set(article).then(() => {
         resolve();
       });
@@ -64,5 +65,45 @@ export default class API {
       });
     });
     return promise;
+  }
+
+  removeArticle(key) {
+    const promise = new Promise((resolve, reject) => {
+      databaseRef.child(`articles/${key}`).remove().then(_ => {
+        resolve('article removed');
+      });
+    });
+    return promise;
+  }
+
+  createUser(email, password) {
+    const promise = new Promise((resolve, reject) => {
+      auth.createUserWithEmailAndPassword('jpn721@hotmail.com', 'Alan0302').then(user => {
+        resolve(user);
+      }).catch(res => {
+        reject(`failed to create user ${email}`);
+      });
+    });
+    return promise;
+  }
+
+  signOut() {
+    console.log('signing out');
+    auth.signOut();
+  }
+
+  signIn(email, password) {
+    const promise = new Promise((resolve, reject) => {
+      auth.signInWithEmailAndPassword(email, password).then(user => {
+        resolve(user);
+      }).catch(err => {
+        reject(err);
+      });
+    });
+    return promise;
+  }
+
+  onAuthStateChanged(callback) {
+    auth.onAuthStateChanged(user => callback(user));
   }
 }

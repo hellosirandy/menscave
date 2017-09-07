@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ArticleList from 'components/ArticleList/ArticleList';
 import Article from '../models/article';
 import API from '../api';
-const api = new API();
 
 export default class ArticleListContainer extends Component {
   constructor(props) {
@@ -12,6 +11,7 @@ export default class ArticleListContainer extends Component {
       articles: [],
       loading: true,
     }
+    this.api = new API();
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ export default class ArticleListContainer extends Component {
 
   fetchArticles = (category) => {
     this.setState({ articles: [], loading: true });
-    api.getArticles(category).then(res => {
+    this.api.getArticles(category).then(res => {
       this.onArticlesChange(res);
     });
   }

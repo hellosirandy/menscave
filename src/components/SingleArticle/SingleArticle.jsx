@@ -4,6 +4,7 @@ import './SingleArticle.css';
 import ImageViewContainer from '../../containers/ImageViewContainer';
 import SingleView from '../SingleView/SingleView';
 import SplitView from '../SplitView/SplitView';
+import SingleArticleHeaderContainer from '../../containers/SingleArticleHeaderContainer';
 
 const SingleArticle = ({ article, loading}) => {
   const paragraphs = article.paragraphs ? article.paragraphs.map((p, index) => {
@@ -22,7 +23,7 @@ const SingleArticle = ({ article, loading}) => {
     <div className="single-article">
       <Spin spinning={loading}>
         <div className="header-section">
-          <h3>{article.subject}</h3>
+          <SingleArticleHeaderContainer subject={article.subject} articleKey={article.key}/>
         </div>
         <div className="paragraph-section">
           {paragraphs}
