@@ -25,7 +25,7 @@ export default class SingleArticleHeaderContainer extends Component {
           <SingleArticleHeader
             subject={this.props.subject}
             deleteArticle={() => {this.handleDeleteArticle(history)}}
-            editAritlce={this.handleEditArticle}
+            editArticle={this.handleEditArticle}
           />
         )}
       />

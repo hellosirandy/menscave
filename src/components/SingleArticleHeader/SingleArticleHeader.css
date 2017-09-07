@@ -8,14 +8,13 @@
 }
 
 .single-article-header h3 span .header-icon {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: normal;
-  margin-left: 6px;
+  margin-left: 10px;
   cursor: pointer;
 }
 
 .popover-content {
   color: black;
   font-weight: 500;
-  /*font-size: 1.4rem;*/
 }

@@ -16,7 +16,7 @@ const SingleArticleHeader = ({ subject, deleteArticle, editArticle }) => {
       <h3>
         { subject }
         <span className="icon-section">
-          <Popover content={popover('Edit this article')} placement="right">
+          <Popover content={popover('Edit this article')} placement="bottom">
             <Icon
               className="header-icon"
               type="edit"
@@ -29,7 +29,7 @@ const SingleArticleHeader = ({ subject, deleteArticle, editArticle }) => {
             okText="Yes"
             cancelText="No"
             placement="bottomLeft" >
-            <Popover content={popover('Delete this article')} placement="right">
+            <Popover content={popover('Delete this article')} placement="bottom">
               <Icon className="header-icon" type="delete" />
             </Popover>
           </Popconfirm>

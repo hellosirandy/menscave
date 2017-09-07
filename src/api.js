@@ -88,7 +88,6 @@ export default class API {
   }
 
   signOut() {
-    console.log('signing out');
     auth.signOut();
   }
 

@@ -6,18 +6,22 @@ import { message } from 'antd';
 export default class LoginModalContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggingIn: false,
+    }
     this.api = new API();
   }
 
-  handleLogin = (form) => {
+  handleOk = (form) => {
+    this.setState({ loggingIn: true });
     form.validateFields((err, values) => {
       if (!err) {
         this.api.signIn(values.username, values.password).then(user => {
-          // this.setState({ loading: false });
+          this.setState({ loggingIn: false });
           this.props.handleCancel();
           message.success('You are now signed in.', 3);
         }).catch(err => {
-          // this.setState({ loading: false });
+          this.setState({ loggingIn: false });
           if (err.code === 'auth/wrong-password') {
             form.setFields({
               password: {
@@ -44,7 +48,8 @@ export default class LoginModalContainer extends Component {
       <LoginModal
         visible={this.props.visible}
         handleCancel={this.props.handleCancel}
-        handleLogin={this.handleLogin}
+        handleOk={this.handleOk}
+        confirmLoading={this.state.loggingIn}
       />
     )
   }
