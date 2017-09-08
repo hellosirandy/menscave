@@ -4,6 +4,7 @@ import ArticleListContainer from 'containers/ArticleListContainer';
 import SingleArticleContainer from '../../containers/SingleArticleContainer';
 
 const ArticlePage = () => {
+  window.scrollTo(0, 0);
   return(
     <div>
       <Switch>

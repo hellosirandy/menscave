@@ -34,6 +34,7 @@ export default class ImageInputContainer extends Component {
         keyNum={this.props.keyNum}
         form={this.props.form}
         upoadFinish={upoadFinish}
+        existedUrl={this.props.url}
       />
     )
   }

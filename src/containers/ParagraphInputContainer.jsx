@@ -2,13 +2,32 @@ import React, { Component } from 'react';
 import ParagraphInput from '../components/ParagraphInput/ParagraphInput';
 import Paragraph from '../models/paragraph';
 
-let uuid = 0;
 export default class ParagraphInputContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       paragraphs: [new Paragraph(null, 'split', null)],
     }
+    this.uuid = 0;
+  }
+
+  componentDidMount() {
+    const { paragraphs } = this.props;
+    if (paragraphs) {
+      this.fillParagraphs(paragraphs);
+    }
+  }
+
+  fillParagraphs = (paragraphs) => {
+    const { form } = this.props;
+    form.setFieldsValue({
+      keys: paragraphs.map((p, index) => {
+        this.uuid++;
+        return index;
+      }),
+      paragraphs: paragraphs,
+    });
+    this.uuid--;
   }
 
   handleHasTitleClick = (keyNum) => {
@@ -25,7 +44,7 @@ export default class ParagraphInputContainer extends Component {
   handleAddButtonClick = (num, type) => {
     const { form } = this.props;
     let keys = form.getFieldValue('keys');
-    keys.splice(num+1, 0, ++uuid);
+    keys.splice(num+1, 0, ++this.uuid);
     const paragraphs = form.getFieldValue('paragraphs');
     const newParagraph = new Paragraph(null, type, null);
     const nextParagraphs = paragraphs.concat(newParagraph);
@@ -33,7 +52,6 @@ export default class ParagraphInputContainer extends Component {
       keys: keys,
       paragraphs: nextParagraphs,
     });
-    console.log(form.getFieldValue('keys'));
   }
 
   handleDeleteButtonClick = (k, form) => {

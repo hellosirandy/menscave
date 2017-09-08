@@ -19,7 +19,10 @@ const ArticleCard = ({ article }) => {
         title={article.subject}
         extra={article.formatDate(article.createTime)}
         style={{ width: '100%' }}>
-        {cardContent}
+
+        <div className="card-content">
+          {cardContent}
+        </div>
         <hr/>
         <div className="bottom-buttons">
           <Icon type="message" />

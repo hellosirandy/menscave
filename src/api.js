@@ -16,9 +16,20 @@ const storage = firebase.storage();
 
 export default class API {
 
-  saveArticle(article) {
+  createArticle(article, key=null) {
     const promise = new Promise((resolve, reject) => {
-      let articleRef = databaseRef.child('articles').push();
+      let articleRef = key ? databaseRef.child(`articles/${key}`) : databaseRef.child('articles').push();
+      delete article.key;
+      articleRef.set(article).then(() => {
+        resolve();
+      });
+    });
+    return promise;
+  }
+
+  saveArticle(article, key) {
+    const promise = new Promise((resolve, reject) => {
+      let articleRef = databaseRef.child(`articles/${key}`);
       delete article.key;
       articleRef.set(article).then(() => {
         resolve();
@@ -61,7 +72,11 @@ export default class API {
   getSingleArticle(key) {
     const promise = new Promise((resolve, reject) => {
       databaseRef.child(`articles/${key}`).once('value', snapshot => {
-        resolve(snapshot.val());
+        if (snapshot.val()) {
+          resolve(snapshot.val());
+        } else {
+          reject('Aritcle doesn\'t exist.');
+        }
       });
     });
     return promise;

@@ -15,8 +15,8 @@ export default class SingleArticleHeaderContainer extends Component {
       history.push('/article');
     })
   }
-  handleEditArticle = () => {
-    console.log('edit');
+  handleEditArticle = (history) => {
+    history.push(`/editarticle/${this.props.articleKey}`);
   }
   render() {
     return (
@@ -25,7 +25,7 @@ export default class SingleArticleHeaderContainer extends Component {
           <SingleArticleHeader
             subject={this.props.subject}
             deleteArticle={() => {this.handleDeleteArticle(history)}}
-            editArticle={this.handleEditArticle}
+            editArticle={() => {this.handleEditArticle(history)}}
           />
         )}
       />

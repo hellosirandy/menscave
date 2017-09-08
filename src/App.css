@@ -5,3 +5,7 @@ body {
 a, a:hover {
   color: inherit;
 }
+
+.ant-input {
+  /*color: black;*/
+}

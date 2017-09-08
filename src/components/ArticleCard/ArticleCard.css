@@ -11,3 +11,7 @@
 .article-card .bottom-buttons {
   float: right;
 }
+
+.article-card .card-content {
+  font-size: 0.9rem;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import AppHeader from '../AppHeader/AppHeader';
-import AppContent from '../AppContent/AppContent';
+import AppContentContainer from '../../containers/AppContentContainer';
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
@@ -12,7 +12,7 @@ const AppLayout = () => {
           <AppHeader/>
         </Header>
         <Content>
-          <AppContent/>
+          <AppContentContainer/>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           Men's Cave ©2017 Created by Alan Chien

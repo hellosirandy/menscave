@@ -3,7 +3,7 @@ import { Col, Form, Input, Row, Select } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-const InfoInput = ({ form }) => {
+const InfoInput = ({ form, subject, category }) => {
   const { getFieldDecorator } = form;
   return(
     <Row gutter={12}>
@@ -11,6 +11,7 @@ const InfoInput = ({ form }) => {
         <FormItem label="Subject">
           {getFieldDecorator('subject', {
             rules: [{ required: true, message: 'Please input the title.' }],
+            initialValue: subject,
           })(
             <Input size="large" className="form-item"/>
           )}
@@ -20,6 +21,7 @@ const InfoInput = ({ form }) => {
         <FormItem label="Category">
           {getFieldDecorator('category', {
             rules: [{ required: true, message: 'Please select a category.' }],
+            initialValue: category,
           })(
             <Select placeholder="Select a category" size="large" className="form-item">
               <Option value="basketball">Basketball</Option>

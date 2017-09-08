@@ -2,10 +2,10 @@ import React from 'react';
 import './EditArticlePage.css';
 import EditArticleFormContainer from 'containers/EditArticleFormContainer';
 
-const EditArticlePage = () => {
+const EditArticlePage = ({match}) => {
   return (
     <div className="edit-article-page">
-      <EditArticleFormContainer/>
+      <EditArticleFormContainer articleKey={match.params.article}/>
     </div>
   )
 }

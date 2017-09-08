@@ -10,10 +10,46 @@ export default class EditArticleFormContainer extends Component {
     super(props);
     this.state = {
       loading: false,
+      article: {},
+      fetching: false,
     }
     this.api = new API();
   }
+  componentDidMount() {
+    const key = this.props.articleKey;
+    if (key) {
+      this.fetchArticle(key);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.articleKey !== this.props.articleKey) {
+      if (nextProps.articleKey) {
+        this.fetchArticle(nextProps.articleKey);
+      } else {
+        this.setState({ article: {} });
+      }
+    }
+  }
+
+  fetchArticle = (key) => {
+    this.setState({ fetching: true });
+    this.api.getSingleArticle(key).then(res => {
+      const article  = new Article(
+        res.subject,
+        res.category,
+        res.paragraphs,
+        res.updateTime,
+        res.createTime,
+        key
+      );
+      this.setState({ article, fetching: false });
+    }).catch(res => {
+      console.log(res);
+    });
+  }
+
   handleSubmit = (e, form, history) => {
+    const isCreate = this.props.articleKey ? false : true;
     this.setState({ loading: true });
     e.preventDefault();
     form.validateFields((err, values) => {
@@ -24,10 +60,11 @@ export default class EditArticleFormContainer extends Component {
         });
         const currentTime = new Date().getTime();
         const article = new Article(values.subject, values.category, paragraphs, currentTime, currentTime);
-        this.api.saveArticle(article).then(res => {
+        const promise = this.api.saveArticle(article, this.props.articleKey);
+        promise.then(res => {
           this.setState({ loading: false });
-          message.success('You have created an article.');
-          history.push('/article');
+          message.success(`You have ${isCreate ? 'created' : 'modified'} ${article.subject}.`);
+          history.push(isCreate ? '/article' : `/article/${this.props.articleKey}`);
         });
       }
     });
@@ -35,7 +72,16 @@ export default class EditArticleFormContainer extends Component {
   render() {
     const EAF = Form.create()(EditArticleForm);
     return(
-      <Route render={({ history }) => (<EAF handleSubmit={this.handleSubmit} loading={this.state.loading} history={history}/>)}
+      <Route
+        render={({ history }) => (
+          <EAF
+            handleSubmit={this.handleSubmit}
+            loading={this.state.loading}
+            history={history}
+            article={this.state.article}
+            fetching={this.state.fetching}
+          />
+        )}
       />
     )
   }

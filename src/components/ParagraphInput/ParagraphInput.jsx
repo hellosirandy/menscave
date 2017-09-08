@@ -5,14 +5,14 @@ import ImageInputContainer from '../../containers/ImageInputContainer';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-const SplitInput = ({ form, keyNum }) => {
+const SplitInput = ({ form, keyNum, content }) => {
   const { getFieldDecorator } = form;
   return (
     <Row gutter={12}>
       <Col xs={{ span: 24 }} sm={{ span: 12 }}>
         <FormItem label="English">
           {getFieldDecorator(`paragraphs-${keyNum}.content.english`, {
-            initialValue: ''
+            initialValue: content ? content.english : ''
           })(
             <TextArea
               style={{ resize: 'none' }}
@@ -24,7 +24,7 @@ const SplitInput = ({ form, keyNum }) => {
       <Col xs={{ span: 24 }} sm={{ span: 12 }}>
         <FormItem label="中文">
           {getFieldDecorator(`paragraphs-${keyNum}.content.chinese`, {
-            initialValue: ''
+            initialValue: content ? content.chinese : ''
           })(
             <TextArea
               style={{ resize: 'none' }}
@@ -37,12 +37,12 @@ const SplitInput = ({ form, keyNum }) => {
   )
 }
 
-const SingleInput = ({ form, keyNum }) => {
+const SingleInput = ({ form, keyNum, content }) => {
   const { getFieldDecorator } = form;
   return (
     <FormItem>
       {getFieldDecorator(`paragraphs-${keyNum}.content`, {
-        initialValue: ''
+        initialValue: content ? content : ''
       })(
         <TextArea
           style={{ resize: 'none' }}
@@ -53,9 +53,9 @@ const SingleInput = ({ form, keyNum }) => {
   )
 }
 
-const ImageInput = ({ form, keyNum }) => {
+const ImageInput = ({ form, keyNum, content }) => {
   return (
-    <ImageInputContainer form={form} keyNum={keyNum}/>
+    <ImageInputContainer form={form} keyNum={keyNum} url={content}/>
   )
 }
 
@@ -85,8 +85,8 @@ const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, handl
     </Menu>
   );
   const { getFieldDecorator } = form;
-  const content = paragraph.type === 'single' ? (<SingleInput form={form} keyNum={keyNum}/>) : (
-    paragraph.type === 'split' ? (<SplitInput form={form} keyNum={keyNum}/>) : (<ImageInput form={form} keyNum={keyNum}/>)
+  const content = paragraph.type === 'single' ? (<SingleInput form={form} keyNum={keyNum} content={paragraph.content}/>) : (
+    paragraph.type === 'split' ? (<SplitInput form={form} keyNum={keyNum} content={paragraph.content}/>) : (<ImageInput form={form} keyNum={keyNum} content={paragraph.content}/>)
   )
   getFieldDecorator(`paragraphs-${keyNum}.type`, { initialValue: paragraph.type });
   return(
@@ -109,7 +109,7 @@ const ParagraphInput = ({ form, handleHasTitleClick, handleAddButtonClick, handl
           </span>
         </h3>
       </div>
-      {paragraph.title !== null &&
+      {paragraph.title &&
         <FormItem label="Paragraph Title">
           {getFieldDecorator('paragraphs-0.title')(
             <Input size="large"/>

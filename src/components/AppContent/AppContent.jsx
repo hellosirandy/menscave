@@ -1,17 +1,17 @@
 import React from 'react';
-import ArticleListContainer from 'containers/ArticleListContainer';
 import ArticlePage from '../../components/ArticlePage/ArticlePage';
 import EditArticlePage from '../EditArticlePage/EditArticlePage';
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import './AppContent.css';
 
-const AppContent = () => {
+const AppContent = ({authed}) => {
   return(
     <div className="app-content">
       <Switch>
         <Route path='/article' component={ ArticlePage }/>
-        <Route exact path='/newarticle' component={ EditArticlePage }/>
-        <Route exact path='/editarticle/:article' component={ ArticleListContainer }/>
+        <PrivateRoute authed={authed} exact path='/newarticle' component={ EditArticlePage }/>
+        <PrivateRoute authed={authed} exact path='/editarticle/:article' component={ EditArticlePage }/>
       </Switch>
     </div>
   )

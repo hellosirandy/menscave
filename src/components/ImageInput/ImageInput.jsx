@@ -42,14 +42,14 @@ const ImageWall = ({ imageURL, percentage, spinning }) => {
   )
 }
 
-const ImageInput = ({ handleFileSelected, imageURL, percentage, keyNum, form, upoadFinish }) => {
+const ImageInput = ({ handleFileSelected, imageURL, percentage, keyNum, form, upoadFinish, existedUrl }) => {
   const { getFieldDecorator } = form;
-  const content = imageURL === '' ? (
+  const content = imageURL === '' && !existedUrl ? (
     <ImageUploader handleFileSelected={handleFileSelected} form={form} keyNum={keyNum}/>
   ) : (
-    <ImageWall imageURL={imageURL} percentage={percentage} spinning={!upoadFinish}/>
+    <ImageWall imageURL={imageURL||existedUrl} percentage={existedUrl ? 100 : percentage} spinning={!upoadFinish&&!existedUrl}/>
   );
-  getFieldDecorator(`paragraphs-${keyNum}.content`, { initialValue: '' });
+  getFieldDecorator(`paragraphs-${keyNum}.content`, { initialValue: existedUrl ? existedUrl : '' });
   return (
     <div className="image-input">
       { content }

@@ -7,21 +7,21 @@ export default class LoginModalContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggingIn: false,
+      signingIn: false,
     }
     this.api = new API();
   }
 
   handleOk = (form) => {
-    this.setState({ loggingIn: true });
+    this.setState({ signingIn: true });
     form.validateFields((err, values) => {
       if (!err) {
         this.api.signIn(values.username, values.password).then(user => {
-          this.setState({ loggingIn: false });
+          this.setState({ signingIn: false });
           this.props.handleCancel();
           message.success('You are now signed in.', 3);
         }).catch(err => {
-          this.setState({ loggingIn: false });
+          this.setState({ signingIn: false });
           if (err.code === 'auth/wrong-password') {
             form.setFields({
               password: {
@@ -49,7 +49,7 @@ export default class LoginModalContainer extends Component {
         visible={this.props.visible}
         handleCancel={this.props.handleCancel}
         handleOk={this.handleOk}
-        confirmLoading={this.state.loggingIn}
+        confirmLoading={this.state.signingIn}
       />
     )
   }
