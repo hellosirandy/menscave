@@ -1,0 +1,42 @@
+.single-comment {
+  padding: 12px;
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  border: 1px solid #dfdfdf;
+  margin-bottom: 12px;
+}
+
+.single-comment .comment-header {
+  height: 32px;
+}
+
+.single-comment .comment-header .avatar {
+  float: left;
+}
+
+.single-comment .comment-header .comment-info {
+  margin-left: 40px;
+}
+
+.single-comment .comment-header .comment-info .commenter {
+  font-size: 14px;
+  line-height: 1;
+  color: #108ee9;
+  margin-bottom: 6px;
+}
+
+.single-comment .comment-header .comment-info .create-time {
+  font-size: 12px;
+  color: #acacac;
+  line-height: 1;
+}
+
+.single-comment .comment-content {
+  margin-top: 6px;
+  font-size: 14px;
+  color: black;
+}
+
+.single-comment .comment-header .comment-header-buttons {
+  float: right;
+}

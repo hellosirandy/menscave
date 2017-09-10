@@ -40,7 +40,7 @@ export default class EditArticleFormContainer extends Component {
         res.paragraphs,
         res.updateTime,
         res.createTime,
-        key
+        key,
       );
       this.setState({ article, fetching: false });
     }).catch(res => {

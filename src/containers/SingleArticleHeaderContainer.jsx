@@ -8,6 +8,18 @@ export default class SingleArticleHeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.api = new API();
+    this.state = {
+      authed: false,
+    }
+    this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+  
+  handleAuthStateChanged = (user) => {
+    this.setState({ authed: user ? true : false });
   }
   handleDeleteArticle = (history) => {
     this.api.removeArticle(this.props.articleKey).then(res => {
@@ -26,6 +38,7 @@ export default class SingleArticleHeaderContainer extends Component {
             subject={this.props.subject}
             deleteArticle={() => {this.handleDeleteArticle(history)}}
             editArticle={() => {this.handleEditArticle(history)}}
+            authed={this.state.authed}
           />
         )}
       />

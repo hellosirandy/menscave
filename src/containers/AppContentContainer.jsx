@@ -9,7 +9,11 @@ export default class AppContentContainer extends Component {
     this.state = {
       authed: false,
     }
-    this.api.onAuthStateChanged(this.handleAuthStateChanged);
+    this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   handleAuthStateChanged = (user) => {

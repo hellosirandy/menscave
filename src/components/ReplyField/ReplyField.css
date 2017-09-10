@@ -1,0 +1,11 @@
+.reply-field {
+  padding-top: 6px;
+  margin-top: 6px;
+  border-top: 1px solid #d5d5d5;
+}
+
+.reply-field .reply-text {
+  border-left: 2px solid #c3c3c3;
+  padding-left: 6px;
+  margin-left: 6px;
+}

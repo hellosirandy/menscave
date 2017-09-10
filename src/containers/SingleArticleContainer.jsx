@@ -21,7 +21,7 @@ export default class SingleArticleContainer extends Component {
         res.paragraphs,
         res.updateTime,
         res.createTime,
-        this.props.match.params.article
+        this.props.match.params.article,
       );
       this.setState({ article: article, loading: false });
     }).catch(res => {
@@ -32,7 +32,7 @@ export default class SingleArticleContainer extends Component {
   render() {
     const { article, loading } = this.state;
     return(
-      <SingleArticle article={article} loading={loading}/>
+      <SingleArticle article={article} loading={loading} articleKey={this.props.match.params.article}/>
     )
   }
 }

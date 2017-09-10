@@ -1,0 +1,43 @@
+.comment-form {
+  margin-top: 12px;
+  padding: 12px;
+  border: solid 1px #d1d1d1;
+  max-height: 55px;
+  min-height: 55px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 27.5px;
+}
+
+.comment-form.highlight {
+  padding: 24px 12px 0px 12px;
+  max-height: 346px;
+  min-height: 346px;
+}
+
+.comment-form .first-display {
+  border: none;
+  padding: 0;
+}
+
+.comment-form .comment-content {
+  resize: none;
+}
+
+.comment-form .submit-button {
+  float: right;
+}
+
+.comment-form .button-section {
+  height: 30px;
+}
+
+.comment-form .form-header i {
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.comment-form .form-header i:hover {
+  color: #999999;
+}

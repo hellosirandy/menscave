@@ -1,19 +1,22 @@
-export default class Article {
+export default class Comment {
   constructor(
-    subject,
-    category,
-    paragraphs,
-    updateTime,
+    commenter,
+    content,
     createTime,
+    articleKey,
+    reply: { updateTime: number, content: string },
     key,
-    comments,
   ) {
-    this.subject = subject;
-    this.category = category;
-    this.paragraphs = paragraphs;
-    this.updateTime = updateTime;
+    this.commenter = commenter;
+    this.content = content;
     this.createTime = createTime;
-    this.key = key;
+    this.articleKey = articleKey;
+    if (reply) {
+      this.reply = reply;
+    }
+    if (key) {
+      this.key = key;
+    }
   }
 
   formatDate(d) {

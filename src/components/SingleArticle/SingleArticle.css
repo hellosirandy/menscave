@@ -15,3 +15,7 @@
 @media (max-width: 800px) {
 
 }
+
+.single-article .article-part {
+  padding-bottom: 24px;
+}

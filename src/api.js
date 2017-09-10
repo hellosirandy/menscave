@@ -118,6 +118,42 @@ export default class API {
   }
 
   onAuthStateChanged(callback) {
-    auth.onAuthStateChanged(user => callback(user));
+    return auth.onAuthStateChanged(user => callback(user));
+  }
+
+  leaveComment(comment, articleKey) {
+    const promise = new Promise((resolve, reject) => {
+      const newCommentRef = databaseRef.child(`comments/${articleKey}`).push();
+      newCommentRef.set(comment).then(() => {
+        resolve();
+      }).catch(err => {
+        reject(err);
+      })
+    });
+    return promise;
+  }
+
+  onCommentAdded(articleKey, detach, callback) {
+    if (detach) {
+      databaseRef.child(`comments/${articleKey}/`).off('child_added', snapshot => {
+        callback(snapshot.val());
+      });
+    } else {
+      databaseRef.child(`comments/${articleKey}/`).on('child_added', snapshot => {
+        callback(snapshot.val(), snapshot.key);
+      });
+    }
+  }
+
+  replyComment(reply, articleKey, commentKey) {
+    const promise = new Promise((resolve, reject) => {
+      databaseRef.child(`comments/${articleKey}/${commentKey}/`).update({reply: reply}).then(() => {
+        resolve();
+      }).catch(err => {
+        reject(err);
+      })
+    });
+    return promise;
+
   }
 }

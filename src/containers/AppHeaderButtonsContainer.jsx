@@ -8,14 +8,18 @@ export default class AppHeaderButtonsContainer extends Component {
     super(props);
     this.api = new API();
     this.state = {
-      signedIn: false,
+      authed: false,
       modalVisible: false,
     }
-    this.api.onAuthStateChanged(this.handleAuthStateChanged);
+    this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   handleAuthStateChanged = (user) => {
-    this.setState({ signedIn: user ? true : false });
+    this.setState({ authed: user ? true : false });
   }
 
   handleDropdownClick = (event) => {
@@ -34,7 +38,7 @@ export default class AppHeaderButtonsContainer extends Component {
   render() {
     return(
       <AppHeaderButtons
-        signedIn={this.state.signedIn}
+        authed={this.state.authed}
         dropdownClick={this.handleDropdownClick}
         modalVisible={this.state.modalVisible}
         modalCancel={this.handleModalCancel}
