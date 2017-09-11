@@ -1,13 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/app';
-const config = {
-  apiKey: "AIzaSyCyxvA8dLtqMAqQGJ-yTHBT1mSMJ2cY1Zk",
-  authDomain: "menscave-dev.firebaseapp.com",
-  databaseURL: "https://menscave-dev.firebaseio.com",
-  projectId: "menscave-dev",
-  storageBucket: "gs://menscave-dev.appspot.com/",
-  messagingSenderId: "515134572254"
-};
+import config from './firebase-config';
 const firebaseApp = firebase.initializeApp(config);
 const database = firebaseApp.database();
 const databaseRef = database.ref();
