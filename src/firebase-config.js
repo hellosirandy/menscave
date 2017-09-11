@@ -5,4 +5,5 @@ export default {
   projectId: "menscave-dev",
   storageBucket: "gs://menscave-dev.appspot.com/",
   messagingSenderId: "515134572254"
+  
 };
