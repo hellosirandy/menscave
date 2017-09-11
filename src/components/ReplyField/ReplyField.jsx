@@ -1,9 +1,10 @@
 import React from 'react';
-import { Input } from 'antd';
+import { Avatar, Input } from 'antd';
 import './ReplyField.css';
 const { TextArea } = Input;
 
-export default ({ reply, replying, handleInput }) => {
+export default ({ comment, replying, handleInput }) => {
+  const { reply } = comment;
   const content = replying ? (
     <div className="reply-text">
       <TextArea
@@ -15,7 +16,24 @@ export default ({ reply, replying, handleInput }) => {
     </div>
 
   ) : (reply ? (
-    reply.content
+    <div className="admin-reply">
+      <Avatar className="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <div className="reply-body">
+        <div className="top">
+          <span className="admin-name">
+            Alan
+          </span>
+          <span className="reply-content">
+            {reply.content}
+          </span>
+        </div>
+        <div className="reply-create-time">
+          {comment.formatDate(reply.updateTime)}
+        </div>
+      </div>
+
+    </div>
+
   ) : '');
   return (
     <div className="reply-field">

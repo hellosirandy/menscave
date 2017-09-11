@@ -6,7 +6,7 @@ import SingleView from '../SingleView/SingleView';
 import SplitView from '../SplitView/SplitView';
 import './ArticleCard.css';
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, commentCount }) => {
   const cardContent = article ? article.paragraphs[0].type === 'single' ? (<SingleView content={article.paragraphs[0].content}/>) : (
     article.paragraphs[0].type === 'split' ? (<SplitView content={article.paragraphs[0].content}/>) : (
       article.paragraphs[0].type === 'image' ? (<ImageViewContainer content={article.paragraphs[0].content}/>) : null
@@ -25,7 +25,7 @@ const ArticleCard = ({ article }) => {
         </div>
         <hr/>
         <div className="bottom-buttons">
-          <Icon type="message" />
+          <Icon type="message" /> {commentCount}
         </div>
       </Card>
     </Link>

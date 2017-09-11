@@ -20,9 +20,10 @@
 
 .single-comment .comment-header .comment-info .commenter {
   font-size: 14px;
-  line-height: 1;
+  line-height: 16px;
   color: #108ee9;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .single-comment .comment-header .comment-info .create-time {

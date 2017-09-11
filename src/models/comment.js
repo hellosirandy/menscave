@@ -20,7 +20,23 @@ export default class Comment {
   }
 
   formatDate(d) {
-    let date = new Date(d);
+    const current = new Date();
+    const date = new Date(d);
+    const minute = 60000, hour = 3600000, day = 86400000;
+    const diff = current.getTime() - date.getTime();
+    if (diff < minute) {
+      return 'few seconds ago';
+    } else if (diff < hour) {
+      const diffMinute = current.getMinutes() - date.getMinutes();
+      return `${diffMinute} ${diffMinute > 1 ? 'minutes' : 'minute'} ago`;
+    } else if (diff < day) {
+      const diffHour = current.getMinutes() - date.getMinutes();
+      return `${diffHour} ${diffHour > 1 ? 'hours' : 'hour'} ago`;
+    }
+    return this.getExactDate(date);
+  }
+
+  getExactDate(date) {
     return `${this.processDateString(date.getMonth()+1)}/${this.processDateString(date.getDate())} ${this.processDateString(date.getHours())}:${this.processDateString(date.getMinutes())}`;
   }
 

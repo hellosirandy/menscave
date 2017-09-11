@@ -24,7 +24,7 @@ export default class SingleArticleContainer extends Component {
         this.props.match.params.article,
       );
       this.setState({ article: article, loading: false });
-    }).catch(res => {
+    }).catch(err => {
       message.warning('This article doesn\'t exist.');
       this.props.history.push('/article');
     });

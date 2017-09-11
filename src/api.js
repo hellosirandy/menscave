@@ -145,6 +145,27 @@ export default class API {
     }
   }
 
+  onCommentValueChange(articleKey, commentKey, detach, callback) {
+    if (detach) {
+      databaseRef.child(`comments/${articleKey}/${commentKey}/`).off('value', snapshot => {
+        callback(snapshot.val());
+      });
+    } else {
+      databaseRef.child(`comments/${articleKey}/${commentKey}/`).on('value', snapshot => {
+        callback(snapshot.val(), snapshot.key);
+      });
+    }
+  }
+
+  getAllComment(articleKey) {
+    const promise = new Promise((resolve, reject) => {
+      databaseRef.child(`comments/${articleKey}/`).once('value', snapshot => {
+        resolve(snapshot.val());
+      });
+    });
+    return promise;
+  }
+
   replyComment(reply, articleKey, commentKey) {
     const promise = new Promise((resolve, reject) => {
       databaseRef.child(`comments/${articleKey}/${commentKey}/`).update({reply: reply}).then(() => {

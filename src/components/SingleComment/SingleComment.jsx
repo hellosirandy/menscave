@@ -37,7 +37,7 @@ export default ({ comment, authed, replying, handleReplySwitch, handleInput, rep
     <CommentHeaderButtons replying={replying} handleReplySwitch={handleReplySwitch} replyContent={replyContent} handleReplySubmit={handleReplySubmit}/>
   ) : null;
   const replyField = (replying || comment.reply) ? (
-    <ReplyField reply={comment.reply} replying={replying} handleInput={handleInput}/>
+    <ReplyField comment={comment} replying={replying} handleInput={handleInput}/>
   ) : null;
   return (
     <div className="single-comment">

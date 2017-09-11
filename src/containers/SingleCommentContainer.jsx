@@ -11,11 +11,25 @@ export default class SingleCommentContainer extends Component {
       replying: false,
       replyContent: '',
     }
+  }
+
+  componentDidMount() {
+    const { articleKey, comment } = this.props;
+    this.api.onCommentValueChange(articleKey, comment.key, false, this.onCommentValueChange);
     this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
   }
 
   componentWillUnmount() {
+    const { articleKey, comment } = this.props;
+    this.setState({ comment });
+    this.api.onCommentValueChange(articleKey, comment.key, true, this.onCommentValueChange);
     this.unsubscribe();
+  }
+
+  onCommentValueChange = (comment) => {
+    let nextComment = this.props.comment;
+    nextComment.reply = comment.reply;
+    this.setState({ comment: nextComment });
   }
 
   handleAuthStateChanged = (user) => {
@@ -41,9 +55,9 @@ export default class SingleCommentContainer extends Component {
   }
 
   render() {
-    return (
+    const content = this.state.comment ? (
       <SingleComment
-        comment={this.props.comment}
+        comment={this.state.comment}
         authed={this.state.authed}
         replying={this.state.replying}
         handleReplySwitch={this.handleReplySwitch}
@@ -51,6 +65,9 @@ export default class SingleCommentContainer extends Component {
         handleReplySubmit={this.handleReplySubmit}
         replyContent={this.state.replyContent}
       />
+    ) : null;
+    return (
+      content
     )
   }
 }

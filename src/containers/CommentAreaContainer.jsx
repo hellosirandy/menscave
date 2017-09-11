@@ -16,6 +16,10 @@ export default class CommentAreaContainer extends Component {
     this.api.onCommentAdded(this.props.articleKey, false, this.onCommentAdded);
   }
 
+  componentWillUnmount() {
+    this.api.onCommentAdded(this.props.articleKey, true, this.onCommentAdded);
+  }
+
   onCommentAdded = (comment, key) => {
     const comments = this.state.comments;
     const newComment = new Comment(comment.commenter, comment.content, comment.createTime, comment.articleKey, comment.reply, key);

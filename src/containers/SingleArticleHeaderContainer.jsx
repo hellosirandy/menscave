@@ -11,13 +11,16 @@ export default class SingleArticleHeaderContainer extends Component {
     this.state = {
       authed: false,
     }
+  }
+
+  componentDidMount() {
     this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
   }
 
   componentWillUnmount() {
     this.unsubscribe();
   }
-  
+
   handleAuthStateChanged = (user) => {
     this.setState({ authed: user ? true : false });
   }

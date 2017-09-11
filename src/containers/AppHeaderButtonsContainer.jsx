@@ -11,6 +11,9 @@ export default class AppHeaderButtonsContainer extends Component {
       authed: false,
       modalVisible: false,
     }
+  }
+
+  componentDidMount() {
     this.unsubscribe = this.api.onAuthStateChanged(this.handleAuthStateChanged);
   }
 
