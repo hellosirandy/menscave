@@ -63,7 +63,7 @@ export default class EditArticleFormContainer extends Component {
         const promise = this.api.saveArticle(article, this.props.articleKey);
         promise.then(res => {
           this.setState({ loading: false });
-          message.success(`You have ${isCreate ? 'created' : 'modified'} ${article.subject}.`);
+          message.success(`You have ${isCreate ? 'created' : 'edited'} ${article.subject}.`);
           history.push(isCreate ? '/article' : `/article/${this.props.articleKey}`);
         });
       }

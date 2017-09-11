@@ -1,7 +1,11 @@
-.edit-article-form .form-item {
-  /*font-size: 1px;*/
+.edit-article-form .back-button {
+  margin: 12px 0;
 }
 
 .edit-article-form .bottom-buttons {
   float: right;
+}
+
+.edit-article-form .cancel-button {
+  margin-right: 12px;
 }

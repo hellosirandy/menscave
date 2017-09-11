@@ -133,13 +133,11 @@ export default class API {
     return promise;
   }
 
-  onCommentAdded(articleKey, detach, callback) {
+  onCommentAddedOrRemoved(articleKey, detach, callback, type) {
     if (detach) {
-      databaseRef.child(`comments/${articleKey}/`).off('child_added', snapshot => {
-        callback(snapshot.val());
-      });
+      databaseRef.child(`comments/${articleKey}/`).off(type);
     } else {
-      databaseRef.child(`comments/${articleKey}/`).on('child_added', snapshot => {
+      databaseRef.child(`comments/${articleKey}/`).on(type, snapshot => {
         callback(snapshot.val(), snapshot.key);
       });
     }
@@ -175,6 +173,14 @@ export default class API {
       })
     });
     return promise;
+  }
 
+  deleteReply = (articleKey, commentKey) => {
+    const promise = new Promise((resolve, reject) => {
+      databaseRef.child(`comments/${articleKey}/${commentKey}`).remove().then(() => {
+        resolve('comment removed');
+      });
+    });
+    return promise;
   }
 }

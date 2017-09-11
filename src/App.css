@@ -9,3 +9,15 @@ a, a:hover {
 .ant-input {
   /*color: black;*/
 }
+
+.ant-popover-message {
+  color: white;
+}
+
+.ant-popover-inner {
+  background-color: #404040;
+}
+
+.ant-popover-arrow::after {
+  border-bottom-color: #404040 !important;
+}

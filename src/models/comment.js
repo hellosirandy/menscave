@@ -27,10 +27,12 @@ export default class Comment {
     if (diff < minute) {
       return 'few seconds ago';
     } else if (diff < hour) {
-      const diffMinute = current.getMinutes() - date.getMinutes();
+      let diffMinute = current.getMinutes() - date.getMinutes();
+      diffMinute = diffMinute > 0 ? diffMinute : diffMinute + 60;
       return `${diffMinute} ${diffMinute > 1 ? 'minutes' : 'minute'} ago`;
     } else if (diff < day) {
-      const diffHour = current.getMinutes() - date.getMinutes();
+      let diffHour = current.getHours() - date.getHours();
+      diffHour = diffHour > 0 ? diffHour : diffHour + 24;
       return `${diffHour} ${diffHour > 1 ? 'hours' : 'hour'} ago`;
     }
     return this.getExactDate(date);

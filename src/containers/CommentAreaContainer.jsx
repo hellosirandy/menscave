@@ -13,17 +13,28 @@ export default class CommentAreaContainer extends Component {
   }
 
   componentDidMount() {
-    this.api.onCommentAdded(this.props.articleKey, false, this.onCommentAdded);
+    this.api.onCommentAddedOrRemoved(this.props.articleKey, false, this.onCommentAdded, 'child_added');
+    this.api.onCommentAddedOrRemoved(this.props.articleKey, false, this.onCommentRemoved, 'child_removed');
   }
 
   componentWillUnmount() {
-    this.api.onCommentAdded(this.props.articleKey, true, this.onCommentAdded);
+    this.api.onCommentAddedOrRemoved(this.props.articleKey, true, this.onCommentAdded, 'child_added');
+    this.api.onCommentAddedOrRemoved(this.props.articleKey, true, this.onCommentRemoved, 'child_removed');
   }
 
   onCommentAdded = (comment, key) => {
     const comments = this.state.comments;
     const newComment = new Comment(comment.commenter, comment.content, comment.createTime, comment.articleKey, comment.reply, key);
     comments.push(newComment);
+    this.setState({ comments });
+  }
+
+  onCommentRemoved = (comment, key) => {
+    const comments = this.state.comments;
+    const deleteComment = comments.filter((c, i) => {
+      return(c.key === key);
+    })[0];
+    comments.splice(comments.indexOf(deleteComment), 1);
     this.setState({ comments });
   }
 

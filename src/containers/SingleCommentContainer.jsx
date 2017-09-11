@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SingleComment from '../components/SingleComment/SingleComment';
+import { message } from 'antd';
 import API from '../api';
 
 export default class SingleCommentContainer extends Component {
@@ -10,6 +11,7 @@ export default class SingleCommentContainer extends Component {
       authed: false,
       replying: false,
       replyContent: '',
+      loading: false,
     }
   }
 
@@ -27,9 +29,11 @@ export default class SingleCommentContainer extends Component {
   }
 
   onCommentValueChange = (comment) => {
-    let nextComment = this.props.comment;
-    nextComment.reply = comment.reply;
-    this.setState({ comment: nextComment });
+    if (comment) {
+      let nextComment = this.props.comment;
+      nextComment.reply = comment.reply;
+      this.setState({ comment: nextComment });
+    }
   }
 
   handleAuthStateChanged = (user) => {
@@ -47,10 +51,20 @@ export default class SingleCommentContainer extends Component {
   handleReplySubmit = () => {
     const reply = {content: this.state.replyContent, updateTime: new Date().getTime()};
     const { comment, articleKey} = this.props;
+    this.setState({ loading: true });
     this.api.replyComment(reply, articleKey, comment.key).then(() => {
+      this.setState({ loading: false });
       this.handleReplySwitch(false);
     }).catch(err => {
       console.log(err);
+    });
+  }
+
+  handleDeleteReply = () => {
+    const { comment, articleKey} = this.props;
+    this.setState({ loading: true });
+    this.api.deleteReply(articleKey, comment.key).then(() => {
+      message.success('You have deleted a comment');
     });
   }
 
@@ -64,6 +78,8 @@ export default class SingleCommentContainer extends Component {
         handleInput={this.handleInput}
         handleReplySubmit={this.handleReplySubmit}
         replyContent={this.state.replyContent}
+        handleDeleteReply={this.handleDeleteReply}
+        loading={this.state.loading}
       />
     ) : null;
     return (

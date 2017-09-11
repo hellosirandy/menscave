@@ -4,20 +4,20 @@
   border: solid 1px #d1d1d1;
   max-height: 55px;
   min-height: 55px;
-  transition: all 0.3s ease;
+  transition: max-height 0.3s ease, min-height 0.3s ease;
   overflow: hidden;
   border-radius: 27.5px;
 }
 
 .comment-form.highlight {
-  padding: 24px 12px 0px 12px;
+  padding: 24px 24px 0px 24px;
   max-height: 346px;
   min-height: 346px;
 }
 
 .comment-form .first-display {
   border: none;
-  padding: 0;
+  padding-left: 12px;
 }
 
 .comment-form .comment-content {
