@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "menscave-dev"
+    "default": "menscave-prod"
   }
 }
