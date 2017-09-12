@@ -1,8 +1,8 @@
 export default {
-  apiKey: "AIzaSyC7DiV2Gttc568Q2LZJaVhC2Gs59xyUj6E",
-  authDomain: "menscave-prod.firebaseapp.com",
-  databaseURL: "https://menscave-prod.firebaseio.com",
-  projectId: "menscave-prod",
-  storageBucket: "menscave-prod.appspot.com",
-  messagingSenderId: "503147034393"
+  apiKey: "AIzaSyCyxvA8dLtqMAqQGJ-yTHBT1mSMJ2cY1Zk",
+  authDomain: "menscave-dev.firebaseapp.com",
+  databaseURL: "https://menscave-dev.firebaseio.com",
+  projectId: "menscave-dev",
+  storageBucket: "menscave-dev.appspot.com",
+  messagingSenderId: "515134572254"
 }
