@@ -1,15 +1,20 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Men's Cave",
+  "name": "Men's Cave Sports News",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icons/png/android/menscave-192.ico",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/png/android/menscave-128.ico",
+      "sizes": "128x128",
       "type": "image/png"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#f5cd47",
+  "background_color": "#000000"
 }
