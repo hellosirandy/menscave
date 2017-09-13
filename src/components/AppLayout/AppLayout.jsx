@@ -5,7 +5,7 @@ import AppContentContainer from '../../containers/AppContentContainer';
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
-  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
   return (
     <div className="app-layout">
       <Layout>
