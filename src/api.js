@@ -9,10 +9,16 @@ const storage = firebase.storage();
 
 export default class API {
 
-  createArticle(article, key=null) {
+  saveArticle(article, key=null) {
     const promise = new Promise((resolve, reject) => {
-      let articleRef = key ? databaseRef.child(`articles/${key}`) : databaseRef.child('articles').push();
-      delete article.key;
+      let articleRef;
+      if (key) {
+        articleRef = databaseRef.child(`articles/${key}`);
+        article.key = key;
+      } else {
+        articleRef = databaseRef.child('articles').push();
+        article.key = articleRef.key;
+      }
       articleRef.set(article).then(() => {
         resolve();
       });
@@ -20,16 +26,16 @@ export default class API {
     return promise;
   }
 
-  saveArticle(article, key) {
-    const promise = new Promise((resolve, reject) => {
-      let articleRef = databaseRef.child(`articles/${key}`);
-      delete article.key;
-      articleRef.set(article).then(() => {
-        resolve();
-      });
-    });
-    return promise;
-  }
+  // saveArticle(article, key) {
+  //   const promise = new Promise((resolve, reject) => {
+  //     let articleRef = databaseRef.child(`articles/${key}`);
+  //     delete article.key;
+  //     articleRef.set(article).then(() => {
+  //       resolve();
+  //     });
+  //   });
+  //   return promise;
+  // }
 
   uploadImage(file, progress, finish) {
     const d = new Date().getTime().toString();
