@@ -8,8 +8,13 @@
     ],
     "redirects": [
       {
+        "source": "/article/:id",
+        "destination": "/#/article/:id",
+        "type": 301
+      },
+      {
         "source": "/article",
-        "destination": "/",
+        "destination": "/#/article",
         "type": 301
       }
     ]
