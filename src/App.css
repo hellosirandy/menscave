@@ -6,11 +6,7 @@ a, a:hover {
   color: inherit;
 }
 
-.ant-input {
-  /*color: black;*/
-}
-
-/*.ant-popover-message {
+.ant-popover-message {
   color: white;
 }
 
@@ -20,4 +16,4 @@ a, a:hover {
 
 .ant-popover-arrow::after {
   border-bottom-color: #404040 !important;
-}*/
+}

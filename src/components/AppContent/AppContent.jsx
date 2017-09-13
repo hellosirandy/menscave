@@ -10,6 +10,7 @@ const AppContent = ({authed}) => {
     <div className="app-content">
       <Switch>
         <Route path='/article' component={ ArticlePage }/>
+        <Redirect exact from='/' to='/article' />
         <Redirect from='/#/article' to='/article' />
         <Redirect from='/#/article/:article' to='/article/:article' />
         <PrivateRoute authed={authed} exact path='/newarticle' component={ EditArticlePage }/>
