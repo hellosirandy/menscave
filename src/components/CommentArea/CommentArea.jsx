@@ -4,8 +4,8 @@ import SingleCommentContainer from '../../containers/SingleCommentContainer';
 import './CommentArea.css';
 
 const CommentArea = ({ articleKey, comments }) => {
-  const singleComments = comments ? comments.map((c, i) => {
-    return <SingleCommentContainer key={i} comment={c} articleKey={articleKey}/>
+  const singleComments = comments ? comments.map(c => {
+    return <SingleCommentContainer key={c.key} comment={c} articleKey={articleKey}/>
   }) : null;
   return (
     <div className="comment-area">

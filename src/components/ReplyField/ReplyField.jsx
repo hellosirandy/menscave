@@ -17,7 +17,7 @@ export default ({ comment, replying, handleInput }) => {
 
   ) : (reply ? (
     <div className="admin-reply">
-      <Avatar className="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <Avatar className="avatar" src="https://scontent.ftpe7-1.fna.fbcdn.net/v/t1.0-1/p160x160/12931185_1307371602612803_9119272392709512282_n.jpg?oh=1e465fdd233a7d4b3bd5f0f7827cac4c&oe=5A55BAC0" />
       <div className="reply-body">
         <div className="top">
           <span className="admin-name">

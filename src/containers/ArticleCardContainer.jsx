@@ -14,7 +14,7 @@ export default class ArticleCardContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.article) {
       this.api.getAllComment(nextProps.article.key).then(res => {
-        this.setState({ commentCount: Object.keys(res).length });
+        this.setState({ commentCount: res ? Object.keys(res).length : 0 });
       })
     }
 
